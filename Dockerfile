@@ -18,7 +18,14 @@ RUN apk -U add \
         libconfig-dev \
         libsndfile-dev \
         mosquitto-dev \
-        xmltoman
+        xmltoman \
+        dbus \
+        bluez \
+        expect \
+        pulseaudio \
+        libpulse \
+        pulseaudio-bluez \
+        pulseaudio-dev
         
 
 # ALAC Build System:
