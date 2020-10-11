@@ -102,9 +102,10 @@ RUN 	adduser -D shairport-sync -G shairport-sync
 # Add the shairport-sync user to the pre-existing audio group, which has ID 29, for access to the ALSA stuff
 RUN 	addgroup -g 29 docker_audio && addgroup shairport-sync docker_audio
 
-RUN sed 's/^load-module module-console-kit/#load-module module-console-kit/' -i /etc/pulse/default.pa \
-    && echo 'load-module module-switch-on-connect' >> /etc/pulse/default.pa \
-    && echo 'load-module module-native-protocol-tcp auth-anonymous=1' >> /etc/pulse/default.pa
+
+#RUN sed 's/^load-module module-console-kit/#load-module module-console-kit/' -i /etc/pulse/default.pa \
+#    && echo 'load-module module-switch-on-connect' >> /etc/pulse/default.pa \
+#    && echo 'load-module module-native-protocol-tcp auth-anonymous=1' >> /etc/pulse/default.pa
     
 ADD simple-bluetooth-agent.sh /bin/simple-bluetooth-agent.sh
 
