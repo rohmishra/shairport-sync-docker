@@ -92,7 +92,8 @@ RUN 	apk add \
               pulseaudio \
               libpulse \
               pulseaudio-bluez \
-              pulseaudio-dev
+              pulseaudio-dev \
+              bluez-deprecated
 
 RUN 	rm -rf  /lib/apk/db/*
 
