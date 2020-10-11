@@ -17,7 +17,13 @@ RUN apk -U add \
         libconfig-dev \
         libsndfile-dev \
         mosquitto-dev \
-        xmltoman
+        xmltoman \
+        bluez \
+        expect \
+        pulseaudio \
+        libpulse \
+        pulseaudio-bluez \
+        
 
 # ALAC Build System:
 FROM builder-base AS builder-alac
@@ -44,7 +50,7 @@ WORKDIR shairport-sync
 RUN 	git checkout "$SHAIRPORT_SYNC_BRANCH"
 RUN 	autoreconf -fi
 RUN 	./configure \
-              --with-alsa \
+              --with-pa \
               --with-dummy \
               --with-pipe \
               --with-stdout \
@@ -94,6 +100,15 @@ RUN 	adduser -D shairport-sync -G shairport-sync
 
 # Add the shairport-sync user to the pre-existing audio group, which has ID 29, for access to the ALSA stuff
 RUN 	addgroup -g 29 docker_audio && addgroup shairport-sync docker_audio
+
+RUN mkdir /var/run/dbus
+RUN sed 's/^load-module module-console-kit/#load-module module-console-kit/' -i /etc/pulse/default.pa \
+    && echo 'load-module module-switch-on-connect' >> /etc/pulse/default.pa \
+    && echo 'load-module module-native-protocol-tcp auth-anonymous=1' >> /etc/pulse/default.pa
+    
+ADD simple-bluetooth-agent.sh /bin/simple-bluetooth-agent.sh
+
+ENV PULSEAUDIO_SYSTEM_START=1
 
 COPY 	start.sh /
 
