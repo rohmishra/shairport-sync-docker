@@ -22,7 +22,8 @@ RUN apk -U add \
         expect \
         pulseaudio \
         libpulse \
-        pulseaudio-bluez
+        pulseaudio-bluez \
+        pulseaudio-dev
         
 
 # ALAC Build System:
