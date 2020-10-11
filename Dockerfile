@@ -2,6 +2,7 @@ FROM alpine AS builder-base
 # General Build System:
 RUN apk -U add \
         git \
+        dbus \
         build-base \
         autoconf \
         automake \
@@ -72,7 +73,6 @@ FROM 	alpine
 
 RUN 	apk add \
               alsa-lib \
-              dbus \
               popt \
               glib \
               mbedtls \
@@ -83,7 +83,8 @@ RUN 	apk add \
               mosquitto-libs \
               su-exec \
               libgcc \
-              libgc++
+              libgc++ \
+              bash
 
 RUN 	rm -rf  /lib/apk/db/*
 
