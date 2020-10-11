@@ -10,7 +10,7 @@ rm -ff /run/dbus/pid
 dbus-uuidgen --ensure
 dbus-daemon --system
 
-pulseaudio --log-level=1 &
+pulseaudio --log-level=1 --system &
 /usr/lib/bluetooth/bluetoothd --plugin=a2dp -n &
 
 avahi-daemon --daemonize --no-chroot
